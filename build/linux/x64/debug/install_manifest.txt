@@ -1,0 +1,17 @@
+/home/vbouser/Рабочий стол/Projects/Tess/citrus_planer/build/linux/x64/debug/bundle/citrus_planer
+/home/vbouser/Рабочий стол/Projects/Tess/citrus_planer/build/linux/x64/debug/bundle/data/icudtl.dat
+/home/vbouser/Рабочий стол/Projects/Tess/citrus_planer/build/linux/x64/debug/bundle/lib/libflutter_linux_gtk.so
+/home/vbouser/Рабочий стол/Projects/Tess/citrus_planer/build/linux/x64/debug/bundle/data/flutter_assets/kernel_blob.bin
+/home/vbouser/Рабочий стол/Projects/Tess/citrus_planer/build/linux/x64/debug/bundle/data/flutter_assets/AssetManifest.bin
+/home/vbouser/Рабочий стол/Projects/Tess/citrus_planer/build/linux/x64/debug/bundle/data/flutter_assets/version.json
+/home/vbouser/Рабочий стол/Projects/Tess/citrus_planer/build/linux/x64/debug/bundle/data/flutter_assets/AssetManifest.json
+/home/vbouser/Рабочий стол/Projects/Tess/citrus_planer/build/linux/x64/debug/bundle/data/flutter_assets/NOTICES.Z
+/home/vbouser/Рабочий стол/Projects/Tess/citrus_planer/build/linux/x64/debug/bundle/data/flutter_assets/fonts/MaterialIcons-Regular.otf
+/home/vbouser/Рабочий стол/Projects/Tess/citrus_planer/build/linux/x64/debug/bundle/data/flutter_assets/shaders/ink_sparkle.frag
+/home/vbouser/Рабочий стол/Projects/Tess/citrus_planer/build/linux/x64/debug/bundle/data/flutter_assets/NativeAssetsManifest.json
+/home/vbouser/Рабочий стол/Projects/Tess/citrus_planer/build/linux/x64/debug/bundle/data/flutter_assets/FontManifest.json
+/home/vbouser/Рабочий стол/Projects/Tess/citrus_planer/build/linux/x64/debug/bundle/data/flutter_assets/assets/logo.png
+/home/vbouser/Рабочий стол/Projects/Tess/citrus_planer/build/linux/x64/debug/bundle/data/flutter_assets/assets/fonts/RobotoMono-Regular.ttf
+/home/vbouser/Рабочий стол/Projects/Tess/citrus_planer/build/linux/x64/debug/bundle/data/flutter_assets/assets/fonts/RobotoMono-Medium.ttf
+/home/vbouser/Рабочий стол/Projects/Tess/citrus_planer/build/linux/x64/debug/bundle/data/flutter_assets/assets/fonts/RobotoMono-Light.ttf
+/home/vbouser/Рабочий стол/Projects/Tess/citrus_planer/build/linux/x64/debug/bundle/data/flutter_assets/assets/fonts/RobotoMono-Bold.ttf

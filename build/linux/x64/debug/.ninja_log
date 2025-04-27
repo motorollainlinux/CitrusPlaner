@@ -1,0 +1,56 @@
+# ninja log v5
+40	9336	0	/home/vbouser/Рабочий стол/Projects/Tess/citrus_planer/linux/flutter/ephemeral/libflutter_linux_gtk.so	98567fd3ed4be0a8
+40	9336	0	/home/vbouser/Рабочий стол/Projects/Tess/citrus_planer/linux/flutter/ephemeral/flutter_linux/fl_view.h	98567fd3ed4be0a8
+40	9336	0	/home/vbouser/Рабочий стол/Projects/Tess/citrus_planer/linux/flutter/ephemeral/flutter_linux/fl_method_channel.h	98567fd3ed4be0a8
+40	9336	0	/home/vbouser/Рабочий стол/Projects/Tess/citrus_planer/linux/flutter/ephemeral/flutter_linux/fl_binary_codec.h	98567fd3ed4be0a8
+40	9336	0	/home/vbouser/Рабочий стол/Projects/Tess/citrus_planer/linux/flutter/ephemeral/flutter_linux/fl_method_response.h	98567fd3ed4be0a8
+40	9336	0	/home/vbouser/Рабочий стол/Projects/Tess/citrus_planer/linux/flutter/ephemeral/flutter_linux/fl_value.h	98567fd3ed4be0a8
+40	9336	0	/home/vbouser/Рабочий стол/Projects/Tess/citrus_planer/linux/flutter/ephemeral/flutter_linux/fl_method_codec.h	98567fd3ed4be0a8
+40	9336	0	/home/vbouser/Рабочий стол/Projects/Tess/citrus_planer/linux/flutter/ephemeral/flutter_linux/fl_method_call.h	98567fd3ed4be0a8
+40	9336	0	/home/vbouser/Рабочий стол/Projects/Tess/citrus_planer/linux/flutter/ephemeral/flutter_linux/fl_binary_messenger.h	98567fd3ed4be0a8
+10734	10983	1745771948370969886	intermediates_do_not_run/citrus_planer	f28f52916be030f8
+40	9336	0	flutter/_phony_	98567fd3ed4be0a8
+40	9336	0	/home/vbouser/Рабочий стол/Projects/Tess/citrus_planer/linux/flutter/ephemeral/flutter_linux/fl_json_method_codec.h	98567fd3ed4be0a8
+40	9336	0	/home/vbouser/Рабочий стол/Projects/Tess/citrus_planer/linux/flutter/ephemeral/flutter_linux/fl_engine.h	98567fd3ed4be0a8
+40	9336	0	/home/vbouser/Рабочий стол/Projects/Tess/citrus_planer/linux/flutter/ephemeral/flutter_linux/fl_dart_project.h	98567fd3ed4be0a8
+10983	11401	0	CMakeFiles/install.util	eaa098eaa432d2f8
+40	9336	0	/home/vbouser/Рабочий стол/Projects/Tess/citrus_planer/linux/flutter/ephemeral/flutter_linux/fl_standard_method_codec.h	98567fd3ed4be0a8
+40	9336	0	/home/vbouser/Рабочий стол/Projects/Tess/citrus_planer/build/linux/x64/debug/flutter/_phony_	98567fd3ed4be0a8
+40	9336	0	/home/vbouser/Рабочий стол/Projects/Tess/citrus_planer/linux/flutter/ephemeral/flutter_linux/flutter_linux.h	98567fd3ed4be0a8
+40	9336	0	/home/vbouser/Рабочий стол/Projects/Tess/citrus_planer/linux/flutter/ephemeral/flutter_linux/fl_string_codec.h	98567fd3ed4be0a8
+14407	15676	1744163716994415821	runner/CMakeFiles/citrus_planer.dir/main.cc.o	35b20cb2e523f407
+40	9336	0	/home/vbouser/Рабочий стол/Projects/Tess/citrus_planer/linux/flutter/ephemeral/flutter_linux/fl_standard_message_codec.h	98567fd3ed4be0a8
+40	9336	0	/home/vbouser/Рабочий стол/Projects/Tess/citrus_planer/linux/flutter/ephemeral/flutter_linux/fl_plugin_registrar.h	98567fd3ed4be0a8
+9363	10691	1745771948067967722	runner/CMakeFiles/citrus_planer.dir/__/flutter/generated_plugin_registrant.cc.o	f0787cb0d374f7ec
+40	9336	0	/home/vbouser/Рабочий стол/Projects/Tess/citrus_planer/linux/flutter/ephemeral/flutter_linux/fl_plugin_registry.h	98567fd3ed4be0a8
+40	9336	0	/home/vbouser/Рабочий стол/Projects/Tess/citrus_planer/linux/flutter/ephemeral/flutter_linux/fl_json_message_codec.h	98567fd3ed4be0a8
+40	9336	0	/home/vbouser/Рабочий стол/Projects/Tess/citrus_planer/linux/flutter/ephemeral/flutter_linux/fl_basic_message_channel.h	98567fd3ed4be0a8
+40	9336	0	/home/vbouser/Рабочий стол/Projects/Tess/citrus_planer/linux/flutter/ephemeral/flutter_linux/fl_message_codec.h	98567fd3ed4be0a8
+9359	10734	1745771948116968072	runner/CMakeFiles/citrus_planer.dir/my_application.cc.o	b3c88fea524e2d30
+46	9306	0	/home/vbouser/Рабочий стол/Projects/Tess/citrus_planer/linux/flutter/ephemeral/libflutter_linux_gtk.so	98567fd3ed4be0a8
+46	9306	0	/home/vbouser/Рабочий стол/Projects/Tess/citrus_planer/linux/flutter/ephemeral/flutter_linux/fl_basic_message_channel.h	98567fd3ed4be0a8
+46	9306	0	/home/vbouser/Рабочий стол/Projects/Tess/citrus_planer/linux/flutter/ephemeral/flutter_linux/fl_binary_codec.h	98567fd3ed4be0a8
+46	9306	0	/home/vbouser/Рабочий стол/Projects/Tess/citrus_planer/linux/flutter/ephemeral/flutter_linux/fl_binary_messenger.h	98567fd3ed4be0a8
+46	9306	0	/home/vbouser/Рабочий стол/Projects/Tess/citrus_planer/linux/flutter/ephemeral/flutter_linux/fl_dart_project.h	98567fd3ed4be0a8
+46	9306	0	/home/vbouser/Рабочий стол/Projects/Tess/citrus_planer/linux/flutter/ephemeral/flutter_linux/fl_engine.h	98567fd3ed4be0a8
+46	9306	0	/home/vbouser/Рабочий стол/Projects/Tess/citrus_planer/linux/flutter/ephemeral/flutter_linux/fl_json_message_codec.h	98567fd3ed4be0a8
+46	9306	0	/home/vbouser/Рабочий стол/Projects/Tess/citrus_planer/linux/flutter/ephemeral/flutter_linux/fl_json_method_codec.h	98567fd3ed4be0a8
+46	9306	0	/home/vbouser/Рабочий стол/Projects/Tess/citrus_planer/linux/flutter/ephemeral/flutter_linux/fl_message_codec.h	98567fd3ed4be0a8
+46	9306	0	/home/vbouser/Рабочий стол/Projects/Tess/citrus_planer/linux/flutter/ephemeral/flutter_linux/fl_method_call.h	98567fd3ed4be0a8
+46	9306	0	/home/vbouser/Рабочий стол/Projects/Tess/citrus_planer/linux/flutter/ephemeral/flutter_linux/fl_method_channel.h	98567fd3ed4be0a8
+46	9306	0	/home/vbouser/Рабочий стол/Projects/Tess/citrus_planer/linux/flutter/ephemeral/flutter_linux/fl_method_codec.h	98567fd3ed4be0a8
+46	9306	0	/home/vbouser/Рабочий стол/Projects/Tess/citrus_planer/linux/flutter/ephemeral/flutter_linux/fl_method_response.h	98567fd3ed4be0a8
+46	9306	0	/home/vbouser/Рабочий стол/Projects/Tess/citrus_planer/linux/flutter/ephemeral/flutter_linux/fl_plugin_registrar.h	98567fd3ed4be0a8
+46	9306	0	/home/vbouser/Рабочий стол/Projects/Tess/citrus_planer/linux/flutter/ephemeral/flutter_linux/fl_plugin_registry.h	98567fd3ed4be0a8
+46	9306	0	/home/vbouser/Рабочий стол/Projects/Tess/citrus_planer/linux/flutter/ephemeral/flutter_linux/fl_standard_message_codec.h	98567fd3ed4be0a8
+46	9306	0	/home/vbouser/Рабочий стол/Projects/Tess/citrus_planer/linux/flutter/ephemeral/flutter_linux/fl_standard_method_codec.h	98567fd3ed4be0a8
+46	9306	0	/home/vbouser/Рабочий стол/Projects/Tess/citrus_planer/linux/flutter/ephemeral/flutter_linux/fl_string_codec.h	98567fd3ed4be0a8
+46	9306	0	/home/vbouser/Рабочий стол/Projects/Tess/citrus_planer/linux/flutter/ephemeral/flutter_linux/fl_value.h	98567fd3ed4be0a8
+46	9306	0	/home/vbouser/Рабочий стол/Projects/Tess/citrus_planer/linux/flutter/ephemeral/flutter_linux/fl_view.h	98567fd3ed4be0a8
+46	9306	0	/home/vbouser/Рабочий стол/Projects/Tess/citrus_planer/linux/flutter/ephemeral/flutter_linux/flutter_linux.h	98567fd3ed4be0a8
+46	9306	0	flutter/_phony_	98567fd3ed4be0a8
+46	9306	0	/home/vbouser/Рабочий стол/Projects/Tess/citrus_planer/build/linux/x64/debug/flutter/_phony_	98567fd3ed4be0a8
+9325	10519	1745772045338624506	runner/CMakeFiles/citrus_planer.dir/__/flutter/generated_plugin_registrant.cc.o	f0787cb0d374f7ec
+9324	10565	1745772045388624826	runner/CMakeFiles/citrus_planer.dir/my_application.cc.o	b3c88fea524e2d30
+10565	10823	1745772045651626509	intermediates_do_not_run/citrus_planer	f28f52916be030f8
+10823	11262	0	CMakeFiles/install.util	eaa098eaa432d2f8
