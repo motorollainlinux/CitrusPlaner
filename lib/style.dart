@@ -1,5 +1,12 @@
 import 'package:flutter/material.dart';
 
+class TextStyleExtension {
+  final Color backgroundColor;
+  final TextStyle textStyle;
+
+  TextStyleExtension({required this.backgroundColor, required this.textStyle});
+}
+
 class AppTheme {
   // Цвета
   static const Color textColor = Color(0xFFFFEFE0);
@@ -10,8 +17,14 @@ class AppTheme {
   static const Color interactObj = Color(0xFFAD682F);
   static const Color buttonColor = Color(0xFFA86931);
   static const Color buttonActive = Color(0xFFEC9345);
+  static const Color selectedItem = Color(0xFF21B5FF);
   
   // Текст
+  static final selectedItems = TextStyleExtension(
+  backgroundColor: selectedItem,
+  textStyle: normalText,
+);
+
   static const TextStyle h1 = TextStyle(
     fontSize: 32,
     decoration: TextDecoration.none,

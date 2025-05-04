@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'style.dart';
+import 'file_logic.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -18,7 +19,6 @@ class HomePage extends StatelessWidget {
               hintText: "search...",
             ),
             Row(
-              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 IconButton(
                   onPressed: () {},
@@ -41,56 +41,16 @@ class HomePage extends StatelessWidget {
           ],
         ),
       ),
+
+      //
+      // BODY
+      //
+
       body: Row(
         children: [
-          Expanded(
-            flex: 27,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Expanded(
-                  flex: 83,
-                  child: Container(
-                    color: AppTheme.coffe200,
-                    child: Column(
-                      children: [
-                        SizedBox(height: 25,),
-                        Text("File Explorer", style: AppTheme.h3,),
-                        SizedBox(height: 25,),
-                      ],
-                    ),
-                  ),
-                ),
-                Expanded(
-                  flex: 7,
-                  child: Container(
-                    color: AppTheme.coffe300,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        SizedBox(width: 25,),
-                        IconButton(
-                        onPressed: () {},
-                        icon: AppTheme.addIcon,
-                        ),
-                        IconButton(
-                        onPressed: () {},
-                        icon: AppTheme.newFolderIcon,
-                        ),
-                        IconButton(
-                        onPressed: () {},
-                        icon: AppTheme.deleteIcon,
-                        ),
-                        SizedBox(width: 25,),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          VerticalDivider(
-            width: 2,
+          FileManager(),
+          Container(
+            width: 6,
             color: AppTheme.buttonActive,
           ),
           Expanded(
@@ -139,8 +99,8 @@ class HomePage extends StatelessWidget {
               ],
             ),
           ),
-          VerticalDivider(
-            width: 2,
+          Container(
+            width: 6,
             color: AppTheme.buttonActive,
           ),
           Expanded(
@@ -183,6 +143,116 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
               ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class FileManager extends StatefulWidget {
+  const FileManager({
+    super.key,
+  });
+
+  @override
+  State<FileManager> createState() => _FileManagerState();
+}
+
+class _FileManagerState extends State<FileManager> {
+  late Future<FileNode> _fileTreeFuture;
+
+  //
+  FileNode? selectedFolder;
+  FileNode? selectedFile;
+  
+  @override
+  void initState() {
+    super.initState();
+    _fileTreeFuture = getUserSharedDir().then((basePath) async {
+      final root = await getDirectoryTree(basePath);
+      setState(() {
+        selectedFolder = root;
+      });
+      return root;
+    });
+  }
+
+  Future<FileNode> _loadFileTree() async {
+    final path = await getUserSharedDir();//getAppDataDir();
+    return await getDirectoryTree(path);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      flex: 27,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Expanded(
+            flex: 83,
+            child: Container(
+              color: AppTheme.coffe200,
+              child: Column(
+                children: [
+                  SizedBox(height: 25,),
+                  Text("File manager", style: AppTheme.h3,),
+                  SizedBox(height: 25,),
+                  FutureBuilder<FileNode>(
+                    future: _fileTreeFuture,
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        return FileTreeWidget(
+                          node: snapshot.data!,
+                          selectedFolder: selectedFolder!,
+                          selectedFile: selectedFile,
+                          onFolderSelected: (folder) {
+                            print("Выбрана папка: ${folder?.name} (${folder?.fullPath})");
+                            setState(() {
+                              selectedFolder = folder;
+                            });
+                          },
+                          onFileSelected: (file) {
+                            setState(() {
+                              selectedFile = file;
+                            });
+                          },
+                        ); 
+                      } else if (snapshot.hasError) {
+                        return Text("Ошибка: ${snapshot.error}");
+                      }
+                      return Center(child: CircularProgressIndicator());
+                    },
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Expanded(
+            flex: 7,
+            child: Container(
+              color: AppTheme.coffe300,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(width: 25,),
+                  IconButton(
+                  onPressed: () {},
+                  icon: AppTheme.addIcon,
+                  ),
+                  IconButton(
+                  onPressed: () {},
+                  icon: AppTheme.newFolderIcon,
+                  ),
+                  IconButton(
+                  onPressed: () {},
+                  icon: AppTheme.deleteIcon,
+                  ),
+                  SizedBox(width: 25,),
+                ],
+              ),
             ),
           ),
         ],
@@ -253,9 +323,8 @@ class ResponsiveAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Size get preferredSize {
-    // Вычисляем 5.6% от высоты экрана
     final screenHeight = WidgetsBinding.instance.window.physicalSize.height;
-    final appBarHeight = screenHeight * 0.102; // 5.6%
+    final appBarHeight = screenHeight * 0.102;
     return Size.fromHeight(appBarHeight);
   }
 
