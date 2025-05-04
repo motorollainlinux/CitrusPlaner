@@ -1,8 +1,8 @@
-# Install script for directory: /home/vbouser/Рабочий стол/Projects/Tess/citrus_planer/linux/runner
+# Install script for directory: /home/kirill/mycringe/Projects/flutter/citrus_planer/linux/runner
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/vbouser/Рабочий стол/Projects/Tess/citrus_planer/build/linux/x64/debug/bundle")
+  set(CMAKE_INSTALL_PREFIX "/home/kirill/mycringe/Projects/flutter/citrus_planer/build/linux/x64/debug/bundle")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
