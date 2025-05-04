@@ -19,13 +19,13 @@ flutter:
   fonts:
     - family: RobotoMono
       fonts:
-        - asset: assets/RobotoMono-Bold.ttf
+        - asset: assets/fonts/RobotoMono-Bold.ttf
           weight: 700
-        - asset: assets/RobotoMono-Medium.ttf
+        - asset: assets/fonts/RobotoMono-Medium.ttf
           weight: 500
-        - asset: assets/RobotoMono-Regular.ttf
+        - asset: assets/fonts/RobotoMono-Regular.ttf
           weight: 400
-        - asset: assets/RobotoMono-Light.ttf
+        - asset: assets/fonts/RobotoMono-Light.ttf
           weight: 300
   assets: 
     - assets/logo.png
