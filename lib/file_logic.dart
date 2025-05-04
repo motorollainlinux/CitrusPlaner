@@ -183,7 +183,8 @@ class _FileTreeWidgetState extends State<FileTreeWidget> {
                     InkWell(
                       onTap: () {
                         setState(() {
-                          _expandedStates[node.fullPath] = !_expandedStates[node.fullPath]!;
+                          // _expandedStates[node.fullPath] = !_expandedStates[node.fullPath]!;
+                           _expandedStates[node.fullPath] = !(_expandedStates[node.fullPath] ?? false);
                         });
                       },
                       child: Padding(

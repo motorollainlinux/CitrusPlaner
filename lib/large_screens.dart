@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'style.dart';
+import 'package:path/path.dart' as p;
+import 'dart:io';
 import 'file_logic.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,7 +49,26 @@ class HomePage extends StatelessWidget {
 
       body: Row(
         children: [
-          FileManager(),
+          FutureBuilder<String>(
+          future: getUserSharedDir(), // асинхронный метод
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Center(child: CircularProgressIndicator());
+              } else if (snapshot.hasError) {
+                return Text("Ошибка: ${snapshot.error}");
+              } else if (!snapshot.hasData || snapshot.data == null) {
+                return Text("Не удалось получить путь");
+              }
+
+              final rootPath = snapshot.data!;
+
+              return FileManager(
+                rootPath: rootPath,
+              ); 
+            }
+          ),
+          // FileManager(rootPath: path),
+          // FileManager(),
           Container(
             width: 6,
             color: AppTheme.buttonActive,
@@ -151,10 +171,16 @@ class HomePage extends StatelessWidget {
   }
 }
 
+//                                                  FILE MANAGER
+//                                                  FILE MANAGER
+//                                                  FILE MANAGER
 class FileManager extends StatefulWidget {
-  const FileManager({
-    super.key,
-  });
+  final String rootPath;
+
+  const FileManager({Key? key, required this.rootPath}) : super(key: key);
+  // const FileManager({
+  //   super.key,
+  // });
 
   @override
   State<FileManager> createState() => _FileManagerState();
@@ -163,15 +189,19 @@ class FileManager extends StatefulWidget {
 class _FileManagerState extends State<FileManager> {
   late Future<FileNode> _fileTreeFuture;
 
-  //
   FileNode? selectedFolder;
   FileNode? selectedFile;
+
+  bool _isInputActive = false;
+  TextEditingController _inputController = TextEditingController();
+  String? _currentItemType; // может быть 'file' или 'folder'
   
   @override
   void initState() {
     super.initState();
     _fileTreeFuture = getUserSharedDir().then((basePath) async {
       final root = await getDirectoryTree(basePath);
+      final path = await getUserSharedDir();
       setState(() {
         selectedFolder = root;
       });
@@ -180,7 +210,7 @@ class _FileManagerState extends State<FileManager> {
   }
 
   Future<FileNode> _loadFileTree() async {
-    final path = await getUserSharedDir();//getAppDataDir();
+    final path = await getUserSharedDir();
     return await getDirectoryTree(path);
   }
 
@@ -209,7 +239,6 @@ class _FileManagerState extends State<FileManager> {
                           selectedFolder: selectedFolder!,
                           selectedFile: selectedFile,
                           onFolderSelected: (folder) {
-                            print("Выбрана папка: ${folder?.name} (${folder?.fullPath})");
                             setState(() {
                               selectedFolder = folder;
                             });
@@ -239,15 +268,17 @@ class _FileManagerState extends State<FileManager> {
                 children: [
                   SizedBox(width: 25,),
                   IconButton(
-                  onPressed: () {},
+                  onPressed: selectedFolder != null ? () => _promptInput('file') : null,
                   icon: AppTheme.addIcon,
                   ),
                   IconButton(
-                  onPressed: () {},
+                  onPressed: selectedFolder != null ? () => _promptInput('folder') : null,
                   icon: AppTheme.newFolderIcon,
                   ),
                   IconButton(
-                  onPressed: () {},
+                  onPressed: (selectedFile != null || (selectedFolder != null && selectedFolder?.fullPath != widget.rootPath))
+                      ? _deleteSelectedItem
+                      : null,
                   icon: AppTheme.deleteIcon,
                   ),
                   SizedBox(width: 25,),
@@ -259,11 +290,156 @@ class _FileManagerState extends State<FileManager> {
       ),
     );
   }
+  //
+  void _createFile(String fileName) async {
+    if (![".md", ".css"].any(fileName.endsWith)) {
+      _showErrorDialog("Разрешены только расширения .md и .css");
+      return;
+    }
+
+    final path = p.join(selectedFolder!.fullPath, fileName);
+    final file = File(path);
+
+    try {
+      await file.create();
+      _refreshTree();
+    } catch (e) {
+      _showErrorDialog("Ошибка при создании файла: $e");
+    }
+  }
+  void _createFolder(String folderName) async {
+    final path = p.join(selectedFolder!.fullPath, folderName);
+    final dir = Directory(path);
+
+    try {
+      await dir.create();
+      _refreshTree();
+    } catch (e) {
+      _showErrorDialog("Ошибка при создании папки: $e");
+    }
+  }
+  void _deleteSelectedItem() async {
+    if (selectedFile != null) {
+      final file = File(selectedFile!.fullPath);
+      try {
+        await file.delete();
+        setState(() {
+          selectedFile = null;
+        });
+        _refreshTree();
+      } catch (e) {
+        _showErrorDialog("Ошибка при удалении файла: $e");
+      }
+    } else if (selectedFolder != null && selectedFolder?.fullPath != widget.rootPath) {
+      final dir = Directory(selectedFolder!.fullPath);
+      try {
+        await dir.delete(recursive: true);
+        setState(() {
+          selectedFolder = _getRootNode();// setState(() {
+          //   selectedFolder = null;
+          // }); // выбрать корень или другую папку //
+        });
+        _refreshTree();
+      } catch (e) {
+        _showErrorDialog("Ошибка при удалении папки: $e");
+      }
+    }
+  }
+  void _refreshTree() {
+    setState(() {
+      _fileTreeFuture = getUserSharedDir().then(getDirectoryTree);
+    });
+  }
+
+void _showErrorDialog(String message) {
+    showDialog(
+      context: context,
+      builder: (_) => AlertDialog(
+        title: Text("Ошибка"),
+        content: Text(message),
+        actions: [
+          TextButton(onPressed: Navigator.of(context).pop, child: Text("OK"))
+        ],
+      ),
+    );
+  }
+  void _promptInput(String type) {
+    _currentItemType = type;
+    _isInputActive = true;
+    _inputController.clear();
+
+    showGeneralDialog(
+      context: context,
+      pageBuilder: (_, __, ___) => Container(),
+      transitionDuration: Duration.zero,
+      barrierDismissible: true,
+      barrierLabel: '',
+      transitionBuilder: (_, anim1, __, child) {
+        return FadeTransition(
+          opacity: anim1,
+          child: child,
+        );
+      },
+      routeSettings: RouteSettings(name: "InputDialog"),
+      useRootNavigator: true,
+    ).then((_) {
+      _isInputActive = false;
+    });
+
+    FocusNode focusNode = FocusNode();
+    showDialog(
+      context: context,
+      builder: (_) => AlertDialog(
+        backgroundColor: AppTheme.coffe200,
+        title: Text(type == 'file' ? "Введите имя файла" : "Введите имя папки", style: AppTheme.normalText,),
+        content: TextField(
+          cursorColor: AppTheme.buttonActive,
+          style: AppTheme.normalText,
+          controller: _inputController,
+          autofocus: true,
+          focusNode: focusNode,
+          decoration: InputDecoration(hintText: type == 'file' ? "example.md" : "my_folder", hintStyle: AppTheme.hintText),
+          onSubmitted: (value) {
+            Navigator.of(context).pop();
+            if (type == 'file') {
+              _createFile(value);
+            } else {
+              _createFolder(value);
+            }
+          },
+        ),
+        actions: [
+          TextButton(
+            onPressed: Navigator.of(context).pop,
+            child: Text("Отмена", style: AppTheme.normalText,),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+              if (type == 'file') {
+                _createFile(_inputController.text);
+              } else {
+                _createFolder(_inputController.text);
+              }
+            },
+            child: Text("Создать", style: AppTheme.normalText,),
+          )
+        ],
+      ),
+    );
+  }
+  FileNode _getRootNode() {
+    return FileNode(
+      name: "index",
+      fullPath: widget.rootPath,
+      isDirectory: true,
+    );
+  }
 }
 
-//
-// Search Input
-//
+//                                                             SEARCH INPUT
+//                                                             SEARCH INPUT
+//                                                             SEARCH INPUT
 class SearchInput extends StatelessWidget {
   final TextEditingController textController;
   final String hintText;
@@ -312,9 +488,9 @@ class SearchInput extends StatelessWidget {
   }
 }
 
-//
-// AppBar custom
-//
+//                                                                 APPBAR CUSTOM
+//                                                                 APPBAR CUSTOM
+//                                                                 APPBAR CUSTOM
 class ResponsiveAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Widget title;
   final Color backgroundColor;
