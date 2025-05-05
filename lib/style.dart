@@ -102,9 +102,31 @@ class AppTheme {
     color: textColor,
   );
 
+  static const TextStyle strongText = TextStyle(
+    fontSize: 16,
+    decoration: TextDecoration.none,
+    fontFamily: 'RobotoMono', 
+    fontStyle: FontStyle.normal,
+    fontWeight: FontWeight.w700,
+    height: 16 / 16,
+    letterSpacing: 0,
+    color: textColor,
+  );
+
   static const TextStyle textsmall = TextStyle(
     fontSize: 14,
     decoration: TextDecoration.none,
+    fontFamily: 'RobotoMono',
+    fontStyle: FontStyle.normal,
+    fontWeight: FontWeight.w300,
+    height: 14 / 14,
+    letterSpacing: 0,
+    color: textColor,
+  );
+
+  static const TextStyle linktext = TextStyle(
+    fontSize: 14,
+    decoration: TextDecoration.underline,
     fontFamily: 'RobotoMono',
     fontStyle: FontStyle.normal,
     fontWeight: FontWeight.w300,

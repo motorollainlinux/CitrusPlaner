@@ -1,11 +1,20 @@
 import 'package:flutter/material.dart';
 import 'style.dart';
+import 'screens_logic.dart';
 import 'package:path/path.dart' as p;
 import 'dart:io';
 import 'file_logic.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  FileNode? _selectedFile;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,7 +59,7 @@ class HomePage extends StatelessWidget {
       body: Row(
         children: [
           FutureBuilder<String>(
-          future: getUserSharedDir(), // асинхронный метод
+          future: getUserSharedDir(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return Center(child: CircularProgressIndicator());
@@ -64,11 +73,13 @@ class HomePage extends StatelessWidget {
 
               return FileManager(
                 rootPath: rootPath,
-              ); 
+                onFileSelected: (file) {
+                  setState(() {
+                    _selectedFile = file;
+                  }); 
+                });
             }
           ),
-          // FileManager(rootPath: path),
-          // FileManager(),
           Container(
             width: 6,
             color: AppTheme.buttonActive,
@@ -82,12 +93,11 @@ class HomePage extends StatelessWidget {
                   flex: 83,
                   child: Container(
                     color: AppTheme.coffe200,
-                    child: Column(
-                      children: [
-                        SizedBox(height: 25,),
-                        Text("Click to file...", style: AppTheme.h4,),
-                        SizedBox(height: 25,),
-                      ],
+                    child: MarkdownEditor(
+                      selectedFile: _selectedFile,
+                      onContentChange: (content) {
+                        // Опционально обновлять состояние родителя
+                      },
                     ),
                   ),
                 ),
@@ -176,11 +186,9 @@ class HomePage extends StatelessWidget {
 //                                                  FILE MANAGER
 class FileManager extends StatefulWidget {
   final String rootPath;
+  final onFileSelected;
 
-  const FileManager({Key? key, required this.rootPath}) : super(key: key);
-  // const FileManager({
-  //   super.key,
-  // });
+  const FileManager({Key? key, required this.rootPath, required this.onFileSelected,}) : super(key: key);
 
   @override
   State<FileManager> createState() => _FileManagerState();
@@ -244,6 +252,7 @@ class _FileManagerState extends State<FileManager> {
                             });
                           },
                           onFileSelected: (file) {
+                            widget.onFileSelected(file);
                             setState(() {
                               selectedFile = file;
                             });
@@ -355,10 +364,11 @@ void _showErrorDialog(String message) {
     showDialog(
       context: context,
       builder: (_) => AlertDialog(
-        title: Text("Ошибка"),
-        content: Text(message),
+        backgroundColor: AppTheme.coffe200,
+        title: Text("Ошибка", style: AppTheme.normalText),
+        content: Text(message, style: AppTheme.normalText,),
         actions: [
-          TextButton(onPressed: Navigator.of(context).pop, child: Text("OK"))
+          TextButton(onPressed: Navigator.of(context).pop, child: Text("OK", style: AppTheme.normalText))
         ],
       ),
     );

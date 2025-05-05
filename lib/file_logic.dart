@@ -1,7 +1,9 @@
 import 'dart:io';
 import 'package:path/path.dart' as p;
+import 'screens_logic.dart';
 import 'style.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 
 class FileNode {
   final String name;
@@ -247,6 +249,50 @@ class _FileTreeWidgetState extends State<FileTreeWidget> {
     return null;
   }
 
+  /*
+  Widget _buildFileContentArea() {
+    bool _isEditing = false;
+    if (widget.selectedFile == null) {
+      return Center(child: Text("Выберите файл", style: AppTheme.h4));
+    }
+
+    final file = File(widget.selectedFile!.fullPath);
+
+    if (!file.existsSync()) {
+      return Text("Файл не найден", style: AppTheme.normalText);
+    }
+
+    final content = file.readAsStringSync();
+
+    // Если это .md — показываем Markdown
+    if (widget.selectedFile!.fullPath.endsWith('.md')) {
+      return MarkdownViewerWithTags(
+        filePath: widget.selectedFile!.fullPath,
+        content: content,
+        markdownStyle: AppTheme.defaultMarkdownStyles,
+        onEditRequested: () {
+          setState(() {
+            _isEditing = true;
+          });
+        },
+      );
+    }
+
+    // Иначе — просто текст
+    return TextViewerWithEdit(
+      content: content,
+      isEditing: _isEditing,
+      onContentChanged: (newContent) {
+        file.writeAsStringSync(newContent);
+      },
+      onFinishEditing: () {
+        setState(() {
+          _isEditing = false;
+        });
+      },
+    );
+  }
+*/
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -255,3 +301,117 @@ class _FileTreeWidgetState extends State<FileTreeWidget> {
     );
   }
 }
+/*
+class MarkdownViewerWithTags extends StatelessWidget {
+  final String filePath;
+  final String content;
+  final VoidCallback onEditRequested;
+
+  const MarkdownViewerWithTags({
+    Key? key,
+    required this.filePath,
+    required this.content,
+    required this.onEditRequested,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final lines = content.split('\n');
+    final tags = <String>[];
+    String parsedContent = content;
+
+    // Извлекаем теги, если они есть (например: #tags: work, personal)
+    if (lines.isNotEmpty && lines[0].startsWith('#tags:')) {
+      final tagLine = lines[0].replaceFirst('#tags:', '').trim();
+      tags.addAll(tagLine.split(',').map((t) => t.trim()).where((t) => t.isNotEmpty));
+      parsedContent = lines.sublist(1).join('\n');
+    }
+
+    return GestureDetector(
+      onTap: onEditRequested,
+      child: ListView(
+        padding: EdgeInsets.all(16),
+        children: [
+          // Блок с тегами
+          if (tags.isNotEmpty)
+            Wrap(
+              spacing: 8,
+              children: tags.map((tag) =>
+                  Chip(label: Text("#$tag", style: TextStyle(fontSize: 14)))
+              ).toList(),
+            ),
+
+          SizedBox(height: 16),
+
+          // Отображение Markdown
+          Markdown(
+            data: parsedContent,
+            styleSheet: MarkdownStyleSheet(
+              p: AppTheme.defaultMarkdownStyles,
+              h1: AppTheme.defaultMarkdownStyles.copyWith(fontSize: FontSize.large),
+              h2: AppTheme.defaultMarkdownStyles.copyWith(fontSize: FontSize.mediumLarge),
+              a: AppTheme.defaultMarkdownStyles.copyWith(color: Colors.blue),
+              listBullet: AppTheme.defaultMarkdownStyles,
+              code: TextStyle.backgroundColor = Colors.grey.shade300,
+              textAlign: TextAlign.left,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class TextViewerWithEdit extends StatefulWidget {
+  final String content;
+  final bool isEditing;
+  final Function(String) onContentChanged;
+  final VoidCallback onFinishEditing;
+
+  const TextViewerWithEdit({
+    Key? key,
+    required this.content,
+    required this.isEditing,
+    required this.onContentChanged,
+    required this.onFinishEditing,
+  }) : super(key: key);
+
+  @override
+  _TextViewerWithEditState createState() => _TextViewerWithEditState();
+}
+
+class _TextViewerWithEditState extends State<TextViewerWithEdit> {
+  late TextEditingController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = TextEditingController(text: widget.content);
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (widget.isEditing) {
+      return TextField(
+        controller: _controller,
+        expands: true,
+        maxLines: null,
+        onChanged: widget.onContentChanged,
+        decoration: InputDecoration.collapsed(hintText: "Редактировать..."),
+      );
+    }
+
+    return GestureDetector(
+      onTap: widget.onFinishEditing,
+      child: SingleChildScrollView(
+        child: Text(widget.content),
+      ),
+    );
+  }
+}*/

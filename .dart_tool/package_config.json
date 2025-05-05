@@ -2,6 +2,12 @@
   "configVersion": 2,
   "packages": [
     {
+      "name": "args",
+      "rootUri": "file:///home/kirill/.pub-cache/hosted/pub.dev/args-2.7.0",
+      "packageUri": "lib/",
+      "languageVersion": "3.3"
+    },
+    {
       "name": "async",
       "rootUri": "file:///home/kirill/.pub-cache/hosted/pub.dev/async-2.12.0",
       "packageUri": "lib/",
@@ -30,6 +36,12 @@
       "rootUri": "file:///home/kirill/.pub-cache/hosted/pub.dev/collection-1.19.1",
       "packageUri": "lib/",
       "languageVersion": "3.4"
+    },
+    {
+      "name": "csslib",
+      "rootUri": "file:///home/kirill/.pub-cache/hosted/pub.dev/csslib-0.17.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.19"
     },
     {
       "name": "cupertino_icons",
@@ -62,6 +74,12 @@
       "languageVersion": "3.5"
     },
     {
+      "name": "flutter_markdown",
+      "rootUri": "file:///home/kirill/.pub-cache/hosted/pub.dev/flutter_markdown-0.7.7",
+      "packageUri": "lib/",
+      "languageVersion": "3.4"
+    },
+    {
       "name": "flutter_test",
       "rootUri": "file:///home/kirill/flutter_SDK/flutter/packages/flutter_test",
       "packageUri": "lib/",
@@ -90,6 +108,12 @@
       "rootUri": "file:///home/kirill/.pub-cache/hosted/pub.dev/lints-5.1.1",
       "packageUri": "lib/",
       "languageVersion": "3.6"
+    },
+    {
+      "name": "markdown",
+      "rootUri": "file:///home/kirill/.pub-cache/hosted/pub.dev/markdown-7.3.0",
+      "packageUri": "lib/",
+      "languageVersion": "3.2"
     },
     {
       "name": "matcher",
@@ -230,7 +254,7 @@
       "languageVersion": "3.7"
     }
   ],
-  "generated": "2025-05-04T15:30:40.250737Z",
+  "generated": "2025-05-05T00:46:45.713829Z",
   "generator": "pub",
   "generatorVersion": "3.7.2",
   "flutterRoot": "file:///home/kirill/flutter_SDK/flutter",
